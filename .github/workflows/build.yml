@@ -79,5 +79,5 @@ jobs:
 
       - name: Build ROM
         run: |
-          source ./buildenv.sh ${{ matrix.target }}
+          unica make_rom -z ${{ matrix.target }}
           ./scripts/make_rom.sh
