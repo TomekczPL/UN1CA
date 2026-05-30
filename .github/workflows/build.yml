@@ -81,3 +81,34 @@ jobs:
         run: |
           source ./buildenv.sh ${{ matrix.target }}
           ./scripts/make_rom.sh
+
+      - name: Upload ROM to gofile.io
+        if: success()
+        env:
+          GOFILE_TOKEN: ${{ secrets.GOFILE_TOKEN }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          zips=(out/UN1CA_*.zip)
+          if [ ${#zips[@]} -eq 0 ]; then
+            echo "No ROM zip found in out/ — nothing to upload."
+            exit 1
+          fi
+          server="$(curl -s https://api.gofile.io/servers | jq -r '.data.servers[0].name')"
+          echo "Using gofile server: $server"
+          auth=()
+          if [ -n "${GOFILE_TOKEN:-}" ]; then
+            auth=(-H "Authorization: Bearer $GOFILE_TOKEN")
+          fi
+          echo "### 📦 gofile.io uploads (${{ matrix.target }})" >> "$GITHUB_STEP_SUMMARY"
+          for z in "${zips[@]}"; do
+            echo "Uploading $(basename "$z") ..."
+            resp="$(curl -s "${auth[@]}" -F "file=@$z" "https://${server}.gofile.io/contents/uploadfile")"
+            link="$(echo "$resp" | jq -r '.data.downloadPage // empty')"
+            if [ -z "$link" ]; then
+              echo "Upload failed. Response: $resp"
+              exit 1
+            fi
+            echo "✅ $(basename "$z") -> $link"
+            echo "- [$(basename "$z")]($link)" >> "$GITHUB_STEP_SUMMARY"
+          done
