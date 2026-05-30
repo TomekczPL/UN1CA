@@ -87,11 +87,16 @@ jobs:
         env:
           GOFILE_TOKEN: ${{ secrets.GOFILE_TOKEN }}
         run: |
-          set -euo pipefail
-          shopt -s nullglob
-          zips=(out/UN1CA_*.zip)
+          set -uo pipefail
+          # Resolve the build's real OUT_DIR (buildenv sets OUT_DIR=$SRC_DIR/out)
+          set +u; source ./buildenv.sh ${{ matrix.target }} >/dev/null 2>&1 || true; set -u
+          mapfile -t zips < <(find "${OUT_DIR:-out}" "$GITHUB_WORKSPACE" -name 'UN1CA_*.zip' -type f 2>/dev/null | sort -u)
           if [ ${#zips[@]} -eq 0 ]; then
-            echo "No ROM zip found in out/ — nothing to upload."
+            echo "No ROM zip found. Diagnostics:"
+            echo "OUT_DIR=${OUT_DIR:-<unset>} ; PWD=$PWD"
+            ls -la "${OUT_DIR:-out}" 2>/dev/null || echo "(no out dir)"
+            echo "--- all .zip under workspace ---"
+            find "$GITHUB_WORKSPACE" -name '*.zip' -type f 2>/dev/null | head -50
             exit 1
           fi
           server="$(curl -s https://api.gofile.io/servers | jq -r '.data.servers[0].name')"
