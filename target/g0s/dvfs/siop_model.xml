@@ -76,9 +76,9 @@
     <components>
 
         <component name="AP" tempType="SKIN" >
-            <limiter name="CPUFreqMax" step="0" temp="350:360:380:420:440" value="-1:1920000:1536000:1536000:960000" />
+            <limiter name="CPUFreqMax" step="0" temp="360:380:400:430:450" value="-1:2304000:1920000:1536000:960000" />
             <limiter name="OverLimit"           temp="360"                 value="2304000:1920000:1728000:-1"        />
-            <limiter name="GPUFreqMax" step="0" temp="360:380:450:470"     value="-1:500000:500000:404000" />
+            <limiter name="GPUFreqMax" step="0" temp="380:400:450:470"     value="-1:605000:500000:404000" />
             <limiter name="AppInstallDelay"     temp="320:340:400:420"     value="-1:10000:10000:30000" />
             <limiter name="DexOptCpuset"        temp="360"                 value="-1:1" />
         </component>
@@ -198,7 +198,7 @@
         </scenario>
 
         <scenario name="SecCamera:com.sec.android.app.camera" tempType="SKIN" priority="2" >
-            <limiter name="CPUFreqMax" step="0" temp="330:350:380:420:440" value="-1:1920000:1536000:1536000:1152000" />
+            <limiter name="CPUFreqMax" step="0" temp="350:380:400:430:450" value="-1:2304000:1920000:1536000:1152000" />
             <limiter name="OverLimit"           temp="360:380:400:420:450"     value="2304000:1920000:1728000:1728000:-1"         />
         </scenario>
 
@@ -224,8 +224,8 @@
         </scenario>
 
         <scenario name="MultiWindow" tempType="SKIN" priority="2" >
-            <limiter name="CPUFreqMax" step="0" temp="340"     value="-1:1344000:1344000:960000" />
-            <limiter name="GPUFreqMax" step="0" temp="340"     value="-1:500000:500000:303000" />
+            <limiter name="CPUFreqMax" step="0" temp="360"     value="-1:1344000:1344000:960000" />
+            <limiter name="GPUFreqMax" step="0" temp="360"     value="-1:500000:500000:303000" />
             <limiter name="LimitHrr"            temp="430"     value="-1:1"                              />
             <limiter name="DDRFreqMax"                         value="2730000" />
         </scenario>

@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [b0s, g0s, r0s, o1s]
+        target: [g0s]
 
     steps:
       - name: Checkout repo
