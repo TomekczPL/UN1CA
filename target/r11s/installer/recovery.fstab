@@ -1,0 +1,30 @@
+# Copyright (c) 2026 Salvo Giangreco
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Recovery fstab for Galaxy S23 FE (Exynos) (r11s)
+# Device paths taken from /vendor/etc/fstab.s5e9925 of S711BXXSFFZD2
+#
+# <src>				<mnt_point>		<type>	<mnt_flags and options>	<fs_mgr_flags>
+
+system				/system			erofs	ro	avb=vbmeta_system,logical,first_stage_mount
+vendor				/vendor			erofs	ro	avb=vbmeta_system,logical,first_stage_mount
+vendor_dlkm			/vendor_dlkm		erofs	ro	avb=vbmeta_system,logical,first_stage_mount
+product				/product		erofs	ro	avb,logical,first_stage_mount
+odm				/odm			erofs	ro	avb,logical,first_stage_mount
+
+/dev/block/by-name/boot		/boot			emmc	defaults	recoveryonly
+/dev/block/by-name/vendor_boot	/vendor_boot		emmc	defaults	recoveryonly
+/dev/block/by-name/dtbo		/dtbo			emmc	defaults	recoveryonly
+/dev/block/by-name/recovery	/recovery		emmc	defaults	recoveryonly
+/dev/block/by-name/vbmeta	/vbmeta			emmc	defaults	recoveryonly
+/dev/block/by-name/vbmeta_system	/vbmeta_system		emmc	defaults	recoveryonly
+/dev/block/by-name/misc		/misc			emmc	defaults	recoveryonly
+/dev/block/by-name/keystorage	/keystorage		emmc	defaults	recoveryonly
+/dev/block/by-name/harx		/harx			emmc	defaults	recoveryonly
+/dev/block/by-name/metadata	/metadata		ext4	noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic,sync	wait,first_stage_mount,formattable,check
+/dev/block/by-name/userdata	/data			f2fs	noatime,nosuid,nodev,discard,usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678	recoveryonly,length=-20480,fscompress
+/dev/block/by-name/cache	/cache			ext4	defaults	recoveryonly
+/dev/block/by-name/efs		/mnt/vendor/efs		ext4	defaults	recoveryonly
+/dev/block/by-name/cpefs	/mnt/vendor/cpefs	ext4	defaults	recoveryonly
+/dev/block/by-name/prism	/prism			ext4	ro	recoveryonly
+/dev/block/by-name/optics	/optics			ext4	ro	recoveryonly

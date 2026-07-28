@@ -1,0 +1,1 @@
+getprop("ro.boot.bootloader") == "S711BXXS9EYG1" || abort("E3003: This package requires the S711BXXS9EYG1 bootloader; this is a \"" + getprop("ro.boot.bootloader") + "\".");
