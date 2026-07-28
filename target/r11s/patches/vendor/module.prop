@@ -1,0 +1,4 @@
+id=vendor
+name=Vendor patches
+author=tomekczpl
+description=Adds back Android 15 TEE and RIL blobs from S711BXXS9EYG1.
