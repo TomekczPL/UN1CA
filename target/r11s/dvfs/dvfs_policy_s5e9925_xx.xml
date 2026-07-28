@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE DvfsHintList [
+<!ELEMENT DvfsHintList (Hint?,TspHint+)>
+<!ELEMENT Hint EMPTY>
+<!ELEMENT TspHint EMPTY>
+<!ATTLIST TspHint
+          scenario_name CDATA #REQUIRED
+          level CDATA #REQUIRED
+          head CDATA #IMPLIED
+          tail CDATA #IMPLIED>
+]>
+
+<DvfsHintList>
+    <Resolution resoltype="Default">
+        <TspHint scenario_name="Default"               level="2" head="130 1344000 1014000 0"  tail="500 1152000 1014000 0" />
+        <TspHint scenario_name="SipDefault"            level="1" head="170 1344000 0 0" tail="0 0 0 0" />
+        <TspHint scenario_name="GameTouchOff"          level="0" head="0 0 0 0" tail="0 0 0 0" />
+        <TspHint scenario_name="Hovering"              level="0" head="0 0 0 0" tail="0 0 0 0" />
+        <TspHint scenario_name="MTDefault"             level="2" head="1000 1976000 1014000 0" tail="500 1456000 1014000 0" />
+        <TspHint scenario_name="MTTouchOff"            level="2" head="0 0 0 0" tail="0 0 0 0" />
+    </Resolution>
+
+    <Resolution resoltype="WQHD">
+    </Resolution>
+
+    <Resolution resoltype="FHD">
+    </Resolution>
+
+    <Resolution resoltype="HD">
+    </Resolution>
+</DvfsHintList>
